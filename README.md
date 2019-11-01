@@ -1,3 +1,7 @@
+You can see the package here:
+
+https://www.npmjs.com/package/datastructuresnpm
+
 #Data Structures Library
 
 This is a library I created as a personal project, and as a convenience for myself and others. This library contains commonly used data structures such as:
