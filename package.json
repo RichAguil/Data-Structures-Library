@@ -1,0 +1,20 @@
+{
+  "name": "datastructuresnpm",
+  "version": "1.0.3",
+  "description": "This is data structures module I am creating as a personal project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "add origin https://github.com/RichAguil/Personal-Modules.git\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D"
+  },
+  "keywords": [
+    "npm",
+    "data",
+    "structures"
+  ],
+  "author": "Richard Aguilar",
+  "license": "ISC"
+}
