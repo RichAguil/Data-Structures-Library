@@ -13,7 +13,7 @@ This is a library I created as a personal project, and as a convenience for myse
 
 This is a work in progress, and more data structures will be included in the future such as doubly linked lists, hash tables, and so on.
 
-##Example
+## Example
 
 Below you will find an example of how to bring in the module, and begin using it.
 
@@ -44,11 +44,11 @@ var binaryTree = new datastructures.BinaryTree();
 
 ```
 
-##Helper functions
+## Helper functions
 
 The helper functions for each data structure are as follows:
 
-###Stack
+### Stack
 
 1. pop() - removes and returns the top most element in the stack
 2. push(element) - pushes a new element on to the stack
@@ -57,7 +57,7 @@ The helper functions for each data structure are as follows:
 5. isEmpty() - console logs true or false depending on whether stack is empty or not
 6. printStack() - prints all the values in the stack
 
-###Queue
+### Queue
 
 1. enqueue(element) - adds an element to the queue
 2. dequeue() - removes and returns the first element in the queue
@@ -65,7 +65,7 @@ The helper functions for each data structure are as follows:
 4. isEmpty() - console logs true or false depending on whether queue is empty or not
 5. sizeOf() - returns the size of the queue
 
-###Singly Linked List
+### Singly Linked List
 
 1. addNode(element) - adds a node to the linked list
 2. removeNode(element) - removes a specific node of from the linked list based on the value of the element it holds, e.g.(removeNode(5) will remove the node containing the number '5')
@@ -74,7 +74,7 @@ The helper functions for each data structure are as follows:
 5. sizeOf() - returns the size of the linked list
 6. isEmpty() - console logs true or false depending on whether linked list is empty or not
 
-###Binary Search Tree
+### Binary Search Tree
 
 1. addNode(element) - adds a node to the binary search tree
 2. removeNode(element) - removes a specific node from the binary search tree based on the value of the element it holds
