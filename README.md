@@ -46,7 +46,7 @@ var binaryTree = new datastructures.BinaryTree();
 
 ## Methods
 
-The helper functions for each data structure are as follows:
+The methods for each data structure are as follows:
 
 ### Stack
 
