@@ -69,7 +69,7 @@ class Queue {
         for (var i = 0; i < tempArray.length; i++) {
           elementQueue[i] = tempArray[i];
         }
-        
+
         return firstValue;
       }
     }
@@ -249,7 +249,7 @@ class BinaryTreeNode {
   
 }
   
-class BinaryTree {
+class BinarySearchTree {
   
       constructor() {
           this.root = null;
@@ -372,5 +372,5 @@ module.exports = {
     Stack: Stack,
     Queue: Queue,
     SinglyLinkedList: SinglyLinkedList,
-    BinaryTree: BinaryTree
+    BinarySearchTree: BinarySearchTree
 }

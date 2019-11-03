@@ -40,7 +40,7 @@ var dataStructures = require('datastructuresnpm');
 var stack = new dataStructures.Stack();
 var queue = new datastructures.Queue();
 var linkedList = new dataStructures.SinglyLinkedList();
-var binaryTree = new datastructures.BinaryTree();
+var binaryTree = new datastructures.BinarySearchTree();
 
 ```
 
