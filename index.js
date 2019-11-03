@@ -5,11 +5,13 @@ class Stack {
     }
   
     pop() {
-      return this.elementStackArray.pop();
+      var lastValue = this.elementStack[this.elementStack.length - 1];
+      this.elementStack.length--;
+      return lastValue;
     }
   
     push (data) {
-      this.elementStack.push(data);
+      this.elementStack[this.elementStack.length] = data;
     }
   
     peek () {
@@ -46,11 +48,30 @@ class Queue {
     }
   
     enqueue (data) {
-      this.elementQueue.push(data);
+      this.elementQueue[this.elementQueue] = data;
     }
   
     dequeue() {
-      return this.elementQueue.shift();
+      var firstValue;
+      var tempArray = [];
+      if (this.elementQueue == 0) {
+        console.log('Queue is empty!');
+        return 0;
+      } else {
+        firstValue = this.elementQueue[0];
+
+        for (var i = 1; i < this.elementQueue.length;i++) {
+          tempArray[i-1] = elementQueue[i];
+        }
+
+        elementQueue.length = 0;
+
+        for (var i = 0; i < tempArray.length; i++) {
+          elementQueue[i] = tempArray[i];
+        }
+        
+        return firstValue;
+      }
     }
   
     front () {
