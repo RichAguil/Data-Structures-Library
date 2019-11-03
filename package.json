@@ -1,6 +1,6 @@
 {
   "name": "datastructuresnpm",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This is data structures module I am creating as a personal project.",
   "main": "index.js",
   "scripts": {
