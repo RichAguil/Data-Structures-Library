@@ -61,13 +61,13 @@ class Queue {
         firstValue = this.elementQueue[0];
 
         for (var i = 1; i < this.elementQueue.length;i++) {
-          tempArray[i-1] = elementQueue[i];
+          tempArray[i-1] = this.elementQueue[i];
         }
 
-        elementQueue.length = 0;
+        this.elementQueue.length = 0;
 
         for (var i = 0; i < tempArray.length; i++) {
-          elementQueue[i] = tempArray[i];
+          this.elementQueue[i] = tempArray[i];
         }
 
         return firstValue;
