@@ -79,3 +79,4 @@ The methods for each data structure are as follows:
 1. addNode(element) - adds a node to the binary search tree
 2. removeNode(element) - removes a specific node from the binary search tree based on the value of the element it holds
 3. isEmpty() - console logs true or false depending on whether binary tree is empty or not
+4. findDpeth(element) - console logs the depth of the specified element, if it exists
