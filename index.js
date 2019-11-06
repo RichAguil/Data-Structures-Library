@@ -241,131 +241,168 @@ class SinglyLinkedList {
 
 class BinaryTreeNode {
 
-    constructor (data) {
-      this.data = data;
-      this.left = null;
-      this.right = null;
+  constructor (data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+
+}
+
+class BinarySearchTree {
+
+    constructor() {
+        this.root = null;
+    }
+    
+    addNode (data) {
+        var node = new BinaryTreeNode(data);
+        var currentPointer = this.root;
+        if (this.root == null) {
+          this.root = node;
+        } else {
+          return traverseAndInsert(currentPointer, node);
+        }
+        
+        function traverseAndInsert (currentPointer, node) {
+    
+            if (node.data < currentPointer.data) {
+                if (currentPointer.left !== null) {
+                    currentPointer = currentPointer.left;
+                    return traverseAndInsert(currentPointer, node);
+                } else {
+                    currentPointer.left = node;
+                }
+            } else if (node.data > currentPointer.data) {
+                if (currentPointer.right !== null) {
+                    currentPointer = currentPointer.right;
+                    return traverseAndInsert(currentPointer, node);
+                } else {
+                    currentPointer.right = node;
+                }
+            
+            }
+    
+        }
+        
+    return 0;
+    
+    }
+    
+    isEmpty() {
+      if (this.root == null) {
+          return true;
+      }
+    }
+    
+    removeNode (data) {
+    
+        var currentPointer = this.root;
+        var previousPointer = this.root;
+        
+        function traverseAndRemove(data, currentPointer, previousPointer) {
+
+            if (currentPointer == null) {
+                console.log('Tree is empty!');
+                return 0;
+            } else if (data < currentPointer.data) {
+              if (currentPointer.left == null) {
+                console.log("Data does not exist!");
+                return 0;
+              }
+                previousPointer = currentPointer;
+                currentPointer = currentPointer.left;
+                return traverseAndRemove(data, currentPointer, previousPointer);
+            } else if (data > currentPointer.data) {
+              if (currentPointer.right == null) {
+                console.log("Data does not exist!");
+                return 0;
+              }
+                previousPointer = currentPointer;
+                currentPointer = currentPointer.right;
+                return traverseAndRemove(data, currentPointer, previousPointer);
+            } else if (data == currentPointer.data) {
+                if (currentPointer.left == null && currentPointer.right == null) {//No children
+                    if (previousPointer.left.data == data) {
+                        previousPointer.left = null;
+                        return 0;
+                    } else {
+                        previousPointer.right = null;
+                        return 0;
+                    }
+                } else if (currentPointer.left == null || currentPointer.right == null) {//One child
+                    if (currentPointer.left == null && previousPointer.left.data == data) {
+                        previousPointer.left = currentPointer.right;
+                        return 0;
+                    } else if (currentPointer.left == null && previousPointer.right.data == data) {
+                        previousPointer.right = currentPointer.right;
+                        return 0;
+                    } else if (currentPointer.right == null && previousPointer.left.data == data) {
+                        prevousPointer.left = currentPointer.right;
+                    } else if (currentPointer.right == null && previousPointer.right.data == data) {
+                        previousPointer.right = currentPointer.left;
+                    }
+                } else { //Two children
+                    
+                    var minNode;
+                    minNode = findMin(currentPointer.right);
+                    currentPointer.right.left = null;
+                    minNode.left = currentPointer.left;
+                    if (currentPointer.right.data !== minNode.data) {
+                        minNode.right = currentPointer.right;
+                    }
+                    
+                    if (previousPointer.left.data == data) {
+                        previousPointer.left = minNode;
+                        return 0;
+                    } else {
+                        previousPointer.right = minNode;
+                        return 0;
+                    }
+                }
+                
+                function findMin(node) {
+                    if (node.left !== null) {
+                        node = node.left;
+                        return findMin(node);
+                    } else {
+                        return node;
+                    }
+                }
+            }
+      
+        }
+        
+        return traverseAndRemove(data, currentPointer, previousPointer);
+    
     }
   
-}
-  
-class BinarySearchTree {
-  
-      constructor() {
-          this.root = null;
-      }
-      
-      addNode (data) {
-          var node = new BinaryTreeNode(data);
-          var currentPointer = this.root;
-          if (this.root == null) {
-            this.root = node;
-          } else {
-            return this.traverseAndInsert(currentPointer, node);
-          }
-      return 0;
-      }
-      
-      traverseAndInsert (currentPointer, node) {
-      
-          if (node.data < currentPointer.data) {
-              if (currentPointer.left !== null) {
-                  currentPointer = currentPointer.left;
-                  return this.traverseAndInsert(currentPointer, node);
-              } else {
-                  currentPointer.left = node;
-              }
-          } else if (node.data > currentPointer.data) {
-              if (currentPointer.right !== null) {
-                  currentPointer = currentPointer.right;
-                  return this.traverseAndInsert(currentPointer, node);
-              } else {
-                  currentPointer.right = node;
-              }
-          
-          }
-      
-      }
-      
-      isEmpty() {
-        if (this.root == null) {
-            return true;
+
+    findDepth(data) {
+        var level = 1;
+        var currentPointer = this.root;
+        if (currentPointer.data == data) {
+            return level;
+        } else {
+            return locateNode(data, currentPointer, level);
         }
-      }
-      
-      removeNode (data) {
-      
-          var currentPointer = this.root;
-          var previousPointer = this.root;
-          return this.traverseAndRemove(data, currentPointer, previousPointer);
-      
-      }
-    
-      traverseAndRemove(data, currentPointer, previousPointer) {
-  
-          if (this.isEmpty()) {
-              console.log('Tree is empty!');
-              return 0;
-          } else if (data < currentPointer.data) {
-              previousPointer = currentPointer;
-              currentPointer = currentPointer.left;
-              return this.traverseAndRemove(data, currentPointer, previousPointer);
-          } else if (data > currentPointer.data) {
-              previousPointer = currentPointer;
-              currentPointer = currentPointer.right;
-              return this.traverseAndRemove(data, currentPointer, previousPointer);
-          } else if (data == currentPointer.data) {
-              if (currentPointer.left == null && currentPointer.right == null) {//No children
-                  if (previousPointer.left.data == data) {
-                      previousPointer.left = null;
-                      return 0;
-                  } else {
-                      previousPointer.right = null;
-                      return 0;
-                  }
-              } else if (currentPointer.left == null || currentPointer.right == null) {//One child
-                  if (currentPointer.left == null && previousPointer.left.data == data) {
-                      previousPointer.left = currentPointer.right;
-                      return 0;
-                  } else if (currentPointer.left == null && previousPointer.right.data == data) {
-                      previousPointer.right = currentPointer.right;
-                      return 0;
-                  } else if (currentPointer.right == null && previousPointer.left.data == data) {
-                      prevousPointer.left = currentPointer.right;
-                  } else if (currentPointer.right == null && previousPointer.right.data == data) {
-                      previousPointer.right = currentPointer.left;
-                  }
-              } else { //Two children
-                  
-                  var minNode;
-                  minNode = this.findMin(currentPointer.right);
-                  currentPointer.right.left = null;
-                  minNode.left = currentPointer.left;
-                  if (currentPointer.right.data !== minNode.data) {
-                      minNode.right = currentPointer.right;
-                  }
-                  
-                  if (previousPointer.left.data == data) {
-                      previousPointer.left = minNode;
-                      return 0;
-                  } else {
-                      previousPointer.right = minNode;
-                      return 0;
-                  }
-              }
-          }
         
-      }
-      
-      findMin(node) {
-          if (node.left !== null) {
-              node = node.left;
-              return this.findMin(node);
-          } else {
-              return node;
-          }
-      }
-  
+        function locateNode(data, currentPointer, level) {
+            if (data > currentPointer.data && currentPointer.right !== null) {
+                level++;
+                currentPointer = currentPointer.right;
+                return locateNode(data, currentPointer, level);
+            } else if (data < currentPointer.data && currentPointer.left !== null) {
+                level++;
+                currentPointer = currentPointer.left;
+                return locateNode(data, currentPointer, level);
+            }
+            console.log('The node containing the element of', data, 'is at level', level);
+            return level;
+        }
+        
+    }
+
 }
 
 module.exports = {
