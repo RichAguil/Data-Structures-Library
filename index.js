@@ -405,9 +405,154 @@ class BinarySearchTree {
 
 }
 
+class HashTable {
+    
+  constructor() {
+      this.bucket = new Array(8);
+      this.entries = 0;
+      this.loadFactor = this.entries/this.bucket.length;
+  }
+  
+  hashFunction(key, bucket) {
+      var hashValue = 0;
+          
+      for (var i = 0; i < key.length; i++) {
+          
+          hashValue = (hashValue + key.charCodeAt(0)) % bucket.length;
+          
+      }
+      return hashValue;
+  } 
+  
+  insert(key, value) {
+      var data = {};
+      data[key] = value;
+      var newSize = this.bucket.length;
+      
+      if (key.length == 0) {
+          console.log('No key was specified')
+          return 0;
+      }
+      
+      if (this.loadFactor > 0.67) {
+          this.bucket = this.resizeUtility(newSize);
+      }
+      
+      var increment = 0;
+      var index = this.hashFunction(key, this.bucket);
+      
+      if (this.bucket[index] == undefined) {
+          this.bucket[index] = data;
+          this.entries++;
+      } else {
+          while (this.bucket[index]) {  //Linear probing algorithm to resolve collisions
+              index = (this.hashFunction(key,this.bucket) + increment) % this.bucket.length;
+              increment++;
+          }
+          
+          this.bucket[index] = data;
+          this.entries++;
+      }
+      this.loadFactor = this.entries/this.bucket.length;
+  }
+  
+  resizeUtility(size) { //Utility function
+      var tempTable = new HashTable(); //Create temporary table to store rehashed indices
+      var prime = false;
+      var newSize = size*2;
+      var tempObjectKey;
+      var tempObjectValue;
+      
+      while (prime == false) { //Resize hash table to a prime number
+          if (newSize%2 == 0 || newSize%3 == 0 || newSize%5 == 0 || newSize%7 == 0 || newSize%11 == 0) {
+              newSize++;
+          } else {
+              prime = true;
+          }
+      }
+      tempTable.bucket.length = newSize;
+      
+      for (var i = 0; i < this.bucket.length; i++) { //Retrieving objects from old hash table and rehashing them
+          if (this.bucket[i] !== undefined) {
+              tempObjectKey = Object.keys(this.bucket[i])[0];
+              tempObjectValue = this.bucket[i][tempObjectKey];
+              tempTable.insert(tempObjectKey, tempObjectValue);
+          }
+      }
+      this.bucket.length = newSize;
+      return tempTable.bucket;
+  }
+  
+  searchUtility(key) { //Utility functon
+      
+      var index = this.hashFunction(key, this.bucket);
+      var increment = 0;
+      
+      if (this.bucket[index] == undefined) {
+          console.log('This key does not exist');
+          return 0;
+      } else if (this.bucket[index].hasOwnProperty(key)) {
+          return index;
+      } else {
+          while (this.bucket[index] !== undefined) { //If the hashed index is filled, use linear probing to find key
+              increment++;
+              index = (this.hashFunction(key,this.bucket) + increment) % this.bucket.length;
+              if (this.bucket[index].hasOwnProperty(key)) {
+                  return index;
+              }
+          }
+          console.log('This key does not exist');
+          return 0;
+      }
+  }
+  
+  removeAt(index) {
+      
+      delete this.bucket[index];
+      this.entries--;
+      this.loadFactor = this.entries/this.bucket.length;
+
+      
+  }
+  
+  removeKey(key) {
+      
+      var removeIndex = this.searchUtility(key);
+      delete this.bucket[removeIndex];
+      this.entries--;
+      this.loadFactor = this.entries/this.bucket.length;
+  }
+  
+  revealTable () {
+      console.log(this);
+  }
+  
+  findIndex(key) {
+      console.log('This key is at index', this.searchUtility(key));
+      
+  }
+  
+  revealInfo(element) {
+      if (typeof element == "string") {
+          
+          var index = this.searchUtility(element);
+          console.log(this.bucket[index]);
+          
+      } else if (typeof element == "number") {
+          
+          console.log(this.bucket[element]);
+          
+      } else {
+          console.log('Element does not exist!')
+          return 0;
+      }
+  }
+}
+
 module.exports = {
     Stack: Stack,
     Queue: Queue,
     SinglyLinkedList: SinglyLinkedList,
-    BinarySearchTree: BinarySearchTree
+    BinarySearchTree: BinarySearchTree,
+    HashTable: HashTable
 }

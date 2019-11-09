@@ -10,8 +10,9 @@ This is a library I created as a personal project, and as a convenience for myse
 2. Queues
 3. Singly Linked Lists
 4. Binary Search Trees
+5. Hash Table
 
-This is a work in progress, and more data structures will be included in the future such as doubly linked lists, hash tables, and so on.
+This is a work in progress, and more data structures will be included in the future.
 
 ## Example
 
@@ -38,9 +39,10 @@ Below is how you can instantiate the different data structures currently availab
 var dataStructures = require('datastructuresnpm');
 
 var stack = new dataStructures.Stack();
-var queue = new datastructures.Queue();
+var queue = new dataStructures.Queue();
 var linkedList = new dataStructures.SinglyLinkedList();
-var binaryTree = new datastructures.BinarySearchTree();
+var binaryTree = new dataStructures.BinarySearchTree();
+var hashTable = new dataStructures.HashTable();
 
 ```
 
@@ -80,3 +82,12 @@ The methods for each data structure are as follows:
 2. removeNode(element) - removes a specific node from the binary search tree based on the value of the element it holds
 3. isEmpty() - console logs true or false depending on whether binary tree is empty or not
 4. findDepth(element) - console logs the depth of the specified element, if it exists
+
+### Hash Table
+
+1. insert(key, value) - takes a key-value pair, calculates the index via a hash function and inserts it in the table
+2. removeAt(index) - remove key-value pair from index as specified by the user
+3. removeKey(key) - remove key-value pair based on the name of the key specified by the user
+4. revealTable() - reveals the entire table to the user
+5. findIndex(key) - find the index of a particular key-value based on the key
+6. revealInfo(element) - reveals the key-value pair based on information entered by the user; the user may specify either the key or the index
