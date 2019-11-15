@@ -13,7 +13,13 @@
   "keywords": [
     "npm",
     "data",
-    "structures"
+    "structures",
+    "data structures",
+    "stacks",
+    "queues",
+    "linked list",
+    "binary search tree",
+    "hash table"
   ],
   "author": "Richard Aguilar",
   "license": "ISC"
