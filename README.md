@@ -9,17 +9,15 @@ This is a library I created as a personal project, and as a convenience for myse
 1. Stacks
 2. Queues
 3. Singly Linked Lists
-4. Binary Search Trees
-5. Hash Table
-
-This is a work in progress, and more data structures will be included in the future.
+4. Doubly Linked Lists
+5. Binary Search Trees
+6. Hash Table
 
 ## Example
 
 Below you will find an example of how to bring in the module, and begin using it.
 
 ```javascript
-
 var dataStructures = require('datastructuresnpm');
 
 var LL = new dataStructures.SinglyLinkedList();
@@ -29,21 +27,19 @@ LL.addNode(6);
 LL.removeNode(6)
 
 console.log(LL);
-
 ```
 
 Below is how you can instantiate the different data structures currently available:
 
 ```javascript
-
 var dataStructures = require('datastructuresnpm');
 
 var stack = new dataStructures.Stack();
 var queue = new dataStructures.Queue();
-var linkedList = new dataStructures.SinglyLinkedList();
+var singlyLinkedList = new dataStructures.SinglyLinkedList();
+var doublyLinkedList = new dataStructures.DoublyLinkedList();
 var binaryTree = new dataStructures.BinarySearchTree();
 var hashTable = new dataStructures.HashTable();
-
 ```
 
 ## Methods
@@ -75,6 +71,11 @@ The methods for each data structure are as follows:
 4. removeNodeAt(index) - removes a node at specified index
 5. sizeOf() - returns the size of the linked list
 6. isEmpty() - console logs true or false depending on whether linked list is empty or not
+7. displayNode(index) - searches for the node at the specified index and displays the information
+
+### Doubly Linked List
+
+Same methods as those for the Singly Linked List, except now every node in the linked list now has a pointer to the next node, and the previous one. Additionally, the last node is tracked as the tail, just as the first is tracked as the head.
 
 ### Binary Search Tree
 

@@ -96,147 +96,358 @@ class Queue {
   
 }
 
-class LinkedListNode {
-    constructor(data) {
-      this.data = data;
-      this.next = null;
-    }
+class SinglyLinkedNode {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
 }
-  
+
 class SinglyLinkedList {
-  
-    constructor () {
-  
-      this.head = null;
-      this.size = 0;
-  
-    }
-  
-    addNode(data) {
-  
-      var node = new LinkedListNode(data);
-      var currentPointer = this.head;
-  
-      if (currentPointer == null) {
-        this.head = node;
-        this.size++;
-      } else {
-  
-        while (currentPointer.next !== null) {
-          currentPointer = currentPointer.next;
-        }
-  
-        currentPointer.next = node;
-        this.size++;
+
+  constructor () {
+
+    this.head = null;
+    this.size = 0;
+
+  }
+
+  addNode(data) {
+
+    var node = new SinglyLinkedNode(data);
+    var currentPointer = this.head;
+
+    if (currentPointer == null) {
+      this.head = node;
+      this.size++;
+    } else {
+
+      while (currentPointer.next !== null) {
+        currentPointer = currentPointer.next;
       }
-  
+
+      currentPointer.next = node;
+      this.size++;
     }
+
+  }
+
+  sizeOf() {
+    console.log(this.size);
+  }
   
-    sizeOf() {
-      console.log(this.size);
-    }
-    
-    isEmpty() {
+  isEmpty() {
+      
+      if (this.size == 0) {
+          console.log(true);
+      } else {
+          console.log(false);
+      }
+      
+  }
+
+  removeNode(data) {
+
+    var currentPointer = this.head;
+    var previousPointer;
+
+    if (this.size == 0) {
         
-        if (this.size == 0) {
-            console.log(true);
-        } else {
-            console.log(false);
+      console.log("Nothing to be removed!");
+      return 0;
+      
+    } else if (this.size == 1) {
+        
+      this.head = null;
+      this.size--;
+      console.log('Root node has been removed');
+      return 0;
+      
+    } else {
+      
+      while (currentPointer.data !== data) {
+        previousPointer = currentPointer;
+        currentPointer = currentPointer.next;
+        
+        if (currentPointer.next == null && currentPointer.data !== data) {
+            console.log('The specified node does not exist!');
+            return 0;
         }
         
+      }
+
+      if (currentPointer.next == null) {
+        currentPointer = null;
+        this.size--;
+      } else {
+        previousPointer.next = currentPointer.next;
+        currentPointer = null;
+        this.size--;
+      }
+
     }
+
+  }
   
-    removeNode(data) {
-  
+  insertNodeAt(data, index) {
+      
+      var node = new Node(data);
       var currentPointer = this.head;
       var previousPointer;
-  
-      if (this.size == 0) {
+      var iteration = 0;
+      
+      if (index > this.size) {
+          console.log('The index specified is large than the size of the list!');
+          return 0;
+      }      
+      
+      while (iteration !== index) {
           
-        console.log("Nothing to be removed!");
-        return 0;
-        
-      } else if (this.size == 1) {
-          
-        this.head = null;
-        this.size--;
-        console.log("Root node has been removed");
-        return 0;
-        
-      } else {
-        
-        while (currentPointer.data !== data) {
           previousPointer = currentPointer;
           currentPointer = currentPointer.next;
-        }
+          iteration++;
+          
+      }
+      
+      if (currentPointer.next == null) {
+          currentPointer.next = node;
+          this.size++;
+      } else {
+          node.next = currentPointer
+          previousPointer.next = node;
+          this.size++;
+      }
+      
+  }
   
-        if (currentPointer.next == null) {
+  removeNodeAt(index) {
+      
+      var currentPointer = this.head;
+      var previousPointer;
+      var iteration = 0;
+      
+      if (index > this.size) {
+          console.log('The index specified is large than the size of the list!');
+          return 0;
+      }
+      
+      while (iteration !== index) {
+          
+          previousPointer = currentPointer;
+          currentPointer = currentPointer.next;
+          iteration++;
+          
+      }
+      
+      if (currentPointer.next == null) {
+          
           currentPointer = null;
           this.size--;
-        } else {
+          
+      } else {
+          
           previousPointer.next = currentPointer.next;
           currentPointer = null;
           this.size--;
-        }
-  
       }
+      
+  }
   
+  displayNode(index) {
+      
+      var currentPointer = this.head;
+      var iteration = 0;
+      
+      if (index == undefined) {
+          
+          console.log('No index was specified!');
+          return 0;
+          
+      } else if (index > this.size) {
+          
+          console.log('The index specified is larger than the size of the list!');
+          return 0;
+      }
+          
+      while (iteration !== index) {
+          currentPointer = currentPointer.next;
+          iteration++;
+      }
+      
+      console.log(currentPointer);
+  }
+
+}
+
+class DoublyLinkedNode {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+    this.previous = null;
+  }
+}
+
+class DoublyLinkedList {
+
+  constructor () {
+
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+
+  }
+
+  addNode(data) {
+
+    var node = new DoublyLinkedNode(data);
+    var currentPointer = this.head;
+
+    if (currentPointer == null) {
+      this.head = node;
+      this.tail = node;
+      this.size++;
+    } else {
+      
+      this.tail.next = node;
+      node.previous = this.tail;
+      this.tail = node;
+      this.size++;
     }
-    
-    insertNodeAt(data, index) {
-        
-        var node = new Node(data);
-        var currentPointer = this.head;
-        var previousPointer;
-        var iteration = 0;
-        
-        while (iteration !== index) {
-            
-            previousPointer = currentPointer;
-            currentPointer = currentPointer.next;
-            iteration++;
-            
-        }
-        
-        if (currentPointer.next == null) {
-            currentPointer.next = node;
-            this.size++;
-        } else {
-            node.next = currentPointer
-            previousPointer.next = node;
-            this.size++;
-        }
-        
-    }
-    
-    removeNodeAt(index) {
-        
-        var currentPointer = this.head;
-        var previousPointer;
-        var iteration = 0;
-        
-        while (iteration !== index) {
-            
-            previousPointer = currentPointer;
-            currentPointer = currentPointer.next;
-            iteration++;
-            
-        }
-        
-        if (currentPointer.next == null) {
-            
-            currentPointer = null;
-            this.size++;
-            
-        } else {
-            
-            previousPointer.next = currentPointer.next;
-            currentPointer = null;
-            this.size++;
-        }
-        
-    }
+
+  }
+
+  sizeOf() {
+    console.log(this.size);
+  }
   
+  isEmpty() {
+      
+      if (this.size == 0) {
+          console.log(true);
+      } else {
+          console.log(false);
+      }
+      
+  }
+
+  removeNode(data) {
+
+    var currentPointer = this.head;
+
+    if (this.size == 0) {
+        
+      console.log("Nothing to be removed!");
+      return 0;
+      
+    } else if (this.size == 1) {
+        
+      this.head = null;
+      this.size--;
+      console.log("Root node has been removed");
+      return 0;
+      
+    } else {
+      
+      while (currentPointer.data !== data) {
+        currentPointer = currentPointer.next;
+      }
+
+      if (currentPointer.next == null) {
+        this.tail = currentPointer.previous;
+        currentPointer = null;
+        this.tail.next = currentPointer;
+        this.size--;
+      } else {
+        currentPointer.previous.next = currentPointer.next;
+        currentPointer.next.previous = currentPointer.previous;
+        this.size--;
+      }
+
+    }
+
+  }
+  
+  insertNodeAt(data, index) {
+      
+      var node = new Node(data);
+      var currentPointer = this.head;
+      var iteration = 0;
+      
+      while (iteration !== index) {
+          
+          currentPointer = currentPointer.next;
+          iteration++;
+          
+      }
+      
+      if (currentPointer.next == null) {
+          currentPointer.next = node;
+          this.tail = node;
+          this.size++;
+      } else {
+          node.next = currentPointer;
+          node.previous = currentPointer.previous;
+          currentPointer.previous = node;
+          node.previous.next = node;
+          this.size++;
+      }
+      
+  }
+  
+  removeNodeAt(index) {
+      
+      var currentPointer = this.head;
+      var iteration = 0;
+      
+      while (iteration !== index) {
+          
+          currentPointer = currentPointer.next;
+          iteration++;
+          
+      }
+      
+      if (currentPointer.next == null) {
+          this.tail = currentPointer.previous;
+          currentPointer = null;
+          this.tail.next = currentPointer;
+          this.size--;
+          
+      } else {
+          
+          currentPointer.previous.next = currentPointer.next;
+          currentPointer.next.previous = currentPointer.previous
+          currentPointer = null;
+          this.size--;
+      }
+      
+  }
+
+}
+
+  displayNode(index) {
+      
+      var currentPointer = this.head;
+      var iteration = 0;
+      
+      if (index == undefined) {
+          
+          console.log('No index was specified!');
+          return 0;
+          
+      } else if (index > this.size) {
+          
+          console.log('The index specified is larger than the size of the list!');
+          return 0;
+      }
+          
+      while (iteration !== index) {
+          currentPointer = currentPointer.next;
+          iteration++;
+      }
+      
+      console.log(currentPointer);
+  }
+
 }
 
 class BinaryTreeNode {
@@ -553,6 +764,7 @@ module.exports = {
     Stack: Stack,
     Queue: Queue,
     SinglyLinkedList: SinglyLinkedList,
+    DoublyLinkedList: DoublyLinkedList,
     BinarySearchTree: BinarySearchTree,
     HashTable: HashTable
 }
